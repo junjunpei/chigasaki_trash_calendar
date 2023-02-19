@@ -1,29 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { View } from 'react-native';
 import { NativeBaseProvider } from 'native-base'
 import { NavigationContainer } from '@react-navigation/native';
 import { SSRProvider } from '@react-aria/ssr';
+import { RootStack } from './screens/RootStack'
 
 export default function App() {
   return (
     <SSRProvider>
       <NativeBaseProvider>
         <NavigationContainer>
-          <View style={styles.container}>
-            <Text>Open up App.tsx to start working on your app!</Text>
-            <StatusBar style="auto" />
-          </View>
+          <View />
+          <RootStack />
+          <StatusBar style="auto" />
         </NavigationContainer>
       </NativeBaseProvider>
     </SSRProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
