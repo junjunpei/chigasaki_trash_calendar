@@ -1,25 +1,45 @@
-import { TouchableWithoutFeedback, Keyboard, FlatList, } from "react-native";
+import { TouchableWithoutFeedback, Keyboard, FlatList } from "react-native";
 import { towns } from "../utils/SuggestionList";
 import { useForm } from 'react-hook-form'
 import { FormControl, Box, Text, Input, InputGroup, InputLeftAddon, Button, Pressable } from "native-base";
 import { UserRepository } from "../domain/repository/UserRepository";
 import { User } from "../domain/entity/User";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from "../screens/type";
+import { useState, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const ChooseRegion = () => {
-  const { watch, register, handleSubmit, setValue } = useForm<{townName: string}>();
+  const { watch, register, handleSubmit, setValue } = useForm<User>();
 
   const suggestionList = towns.filter((town) => town.includes(watch('townName')))
 
+  const { navigate } = useNavigation<StackNavigationProp<RootStackParamList>>()
+
   const onSubmit = async (data: User) => {
     try {
-      const repository =  new UserRepository
+      const repository = new UserRepository
       await repository.create(data)
+      navigate('TodayTrash')
     } catch (e) {
       alert(`地区登録に失敗しました\n選択し直した上で再度お試しください`)
     }
   }
 
   const termDisabled = towns.find((town) => town === watch('townName'))
+
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
+  
+  useEffect(() => {
+    fetchUser();
+    if (isLoggedIn) navigate('TodayTrash')
+  })
+
+  const fetchUser = async () => {
+    const region = await AsyncStorage.getItem('region')
+    if (region !== null) setIsLoggedIn(true);
+  }
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>

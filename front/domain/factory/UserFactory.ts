@@ -1,15 +1,11 @@
-import { User } from "../entity/User";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export interface UserResponse {
-  id: number;
+  region_id: number;
 }
 
 export class UserFactory {
-  static createFromResponse(res: UserResponse): User {
-    AsyncStorage.setItem('user', String(res.id))
-    return new User(
-      res.id
-    )
+  static storageFromResponse(res: UserResponse) {
+    AsyncStorage.setItem('region', String(res.region_id))
   }
 }

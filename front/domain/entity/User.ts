@@ -1,6 +1,7 @@
 export class User {
   constructor(
-    public id?: number,
-    public townName?: string
+    public id: number | undefined,
+    public townName: string,
+    public regionId: number | undefined
   ) {}
 }
