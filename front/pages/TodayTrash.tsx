@@ -7,7 +7,6 @@ import { TrashRepository } from "../domain/repository/TrashRepository";
 import { Trash } from "../domain/entity/Trash";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import * as SplashScreen from 'expo-splash-screen';
 
 export const TodayTrash = () => {
   const { navigate } = useNavigation<StackNavigationProp<RootStackParamList>>();
@@ -27,10 +26,9 @@ export const TodayTrash = () => {
   const clearStorage = async () => {
     try {
       await AsyncStorage.removeItem('region');
-      navigate('UpdateRegion')
-      console.log(await AsyncStorage.getItem('region'))
+      navigate('ChooseRegion')
     } catch(e) {
-      console.log(e)
+      console.warn(e)
     }
   }
 
@@ -41,9 +39,7 @@ export const TodayTrash = () => {
   }
 
   useEffect(() => {
-    SplashScreen.preventAutoHideAsync();
     init();
-    SplashScreen.hideAsync();
   }, [])
 
   const year = new Date().getFullYear()
@@ -66,12 +62,12 @@ export const TodayTrash = () => {
           justifyContent='center'
         >
           {todayTrash &&
-            <Heading fontSize={24}>
+            <Heading fontSize={24} textAlign='center'>
               {todayTrash.name}
             </Heading>
           }         
         </Box>
-        <Button onPress={() => clearStorage()}>データ削除</Button>
+        <Button mt={10} onPress={() => clearStorage()}>データ削除</Button>
       </Center>
     </Box>
   )
