@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
   resources :users
+  get '/get_trash_dates', to: 'trashes#get_trash_dates'
 end
