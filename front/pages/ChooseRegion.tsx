@@ -4,10 +4,10 @@ import { useForm } from 'react-hook-form'
 import { FormControl, Box, Text, Input, InputGroup, InputLeftAddon, Button, Pressable } from "native-base";
 import { UserRepository } from "../domain/repository/UserRepository";
 import { User } from "../domain/entity/User";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from "../screens/type";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const ChooseRegion = () => {
@@ -31,7 +31,7 @@ export const ChooseRegion = () => {
 
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
   
-  useEffect(() => {
+  useFocusEffect(() => {
     fetchUser();
     if (isLoggedIn) navigate('TodayTrash')
   })

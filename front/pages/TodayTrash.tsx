@@ -53,16 +53,17 @@ export const TodayTrash = () => {
   const todayTrash = trashes.find((t) =>  t.date.toString() === today)
 
   return (
-    <Box bgColor='white' height='100%' p={4} pt='35%'>
+    <Box bgColor='white' height='100%' p={4} pt='30%'>
       <Center>
         <Box
           size={300}
           bgColor='green.300'
           alignItems='center'
           justifyContent='center'
+          borderRadius={4}
         >
           {todayTrash &&
-            <Heading fontSize={24} textAlign='center'>
+            <Heading fontSize={26} textAlign='center'>
               {todayTrash.name}
             </Heading>
           }         
