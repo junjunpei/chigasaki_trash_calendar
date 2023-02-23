@@ -34,7 +34,6 @@ export default function App() {
     }
   }, [appIsReady]);
 
-  if (!appIsReady) return null;
   return (
     <SSRProvider>
       <NativeBaseProvider>

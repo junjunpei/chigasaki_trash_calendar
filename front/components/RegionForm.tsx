@@ -21,7 +21,7 @@ export const RegionForm = () => {
           width='80%'
           borderRightRadius={4}
           bgColor='white'
-          focusOutlineColor='green.400'
+          focusOutlineColor='primary.300'
           fontSize={16}
         />
       </InputGroup>
@@ -41,7 +41,7 @@ export const RegionForm = () => {
                   ml='19.5%'
                   borderRadius={4}
                   borderLeftRadius={0}
-                  bgColor={isPressed ? 'green.200' : 'white'}
+                  bgColor={isPressed ? 'primary.100' : 'white'}
                 >
                   <Text pl={2} my={2}>
                     {item}

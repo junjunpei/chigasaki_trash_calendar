@@ -31,7 +31,7 @@ export const BottomTabs = () => {
             </>
           );
         },
-        tabBarActiveTintColor: 'limegreen',
+        tabBarActiveTintColor: 'deepskyblue',
         tabBarInactiveTintColor: 'gray',
       })}
     >

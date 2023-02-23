@@ -41,7 +41,7 @@ export const UpdateRegion = () => {
             <FormProvider {...methods}>
               <RegionForm />
             </FormProvider>
-            <Button mt={20} variant='subtle' onPress={handleSubmit(onSubmit)} colorScheme='green' isDisabled={!termDisabled}>
+            <Button mt={20} variant='subtle' onPress={handleSubmit(onSubmit)} colorScheme='primary' isDisabled={!termDisabled}>
               変更
             </Button>
           </Box>

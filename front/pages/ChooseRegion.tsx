@@ -54,8 +54,8 @@ export const ChooseRegion = () => {
             <FormProvider {...methods}>
               <RegionForm />
             </FormProvider>
-            <Button mt={20} variant='subtle' onPress={handleSubmit(onSubmit)} colorScheme='green' isDisabled={!termDisabled}>
-              決定
+            <Button mt={20} variant='subtle' onPress={handleSubmit(onSubmit)} colorScheme='primary' isDisabled={!termDisabled}>
+              登録
             </Button>
           </Box>
         </FormControl>
