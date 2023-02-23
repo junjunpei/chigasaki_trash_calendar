@@ -21,7 +21,8 @@ export const ChooseRegion = () => {
     try {
       const repository = new UserRepository
       await repository.create(data)
-      navigate('TodayTrash')
+      const region = await AsyncStorage.getItem('region')
+      if (region) navigate('BottomTabs')
     } catch (e) {
       alert(`地区登録に失敗しました\n選択し直した上で再度お試しください`)
     }
@@ -29,16 +30,16 @@ export const ChooseRegion = () => {
 
   const termDisabled = towns.find((town) => town === watch('townName'))
 
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
+  const [isRegistered, setIsRegistered] = useState<boolean>(false)
   
   useFocusEffect(() => {
     fetchUser();
-    if (isLoggedIn) navigate('TodayTrash')
+    if (isRegistered) navigate('BottomTabs')
   })
 
   const fetchUser = async () => {
     const region = await AsyncStorage.getItem('region')
-    if (region !== null) setIsLoggedIn(true);
+    if (region !== null) setIsRegistered(true);
   }
 
   return (

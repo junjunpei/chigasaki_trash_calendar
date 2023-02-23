@@ -1,17 +1,17 @@
-import { Box, Center, Button, Text, Heading } from "native-base"
+import { Box, Center, Button, Heading } from "native-base"
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamList } from "../screens/type";
 import { TrashRepository } from "../domain/repository/TrashRepository";
 import { Trash } from "../domain/entity/Trash";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../screens/type";
 
 export const TodayTrash = () => {
-  const { navigate } = useNavigation<StackNavigationProp<RootStackParamList>>();
   const { setValue, watch } = useForm<Trash>();
   const [trashes, setTrashes] = useState<Trash[]>();
+  const { navigate } = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   const fetchRegion = async (data: Trash) => {
     try {
