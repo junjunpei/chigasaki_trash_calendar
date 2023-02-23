@@ -3,8 +3,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { TrashRepository } from "../domain/repository/TrashRepository";
 import { Trash } from "../domain/entity/Trash";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
+import { useState, useCallback } from "react";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../screens/type";
 import AppLoading from "expo-app-loading";
@@ -14,10 +14,10 @@ export const TodayTrash = () => {
   const [trashes, setTrashes] = useState<Trash[]>();
   const { navigate } = useNavigation<StackNavigationProp<RootStackParamList>>();
 
-  const fetchRegion = async (data: Trash) => {
+  const fetchRegion = async () => {
     try {
       const repository = new TrashRepository;
-      const trashData = await repository.getTrashDates(data);
+      const trashData = await repository.getTrashDates(watch());
       setTrashes(trashData)
     } catch(e) {
       console.log(e)
@@ -36,12 +36,14 @@ export const TodayTrash = () => {
   const init = async () => {
     const region = await AsyncStorage.getItem('region')
     setValue('regionId', Number(region))
-    fetchRegion(watch())
+    fetchRegion()
   }
 
-  useEffect(() => {
-    init();
-  }, [])
+  useFocusEffect(
+    useCallback(() => {
+      init();
+    }, []),
+  )
 
   const year = new Date().getFullYear()
   const month = Number(new Date().getMonth()) + 1

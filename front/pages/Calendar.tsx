@@ -3,12 +3,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useForm } from 'react-hook-form';
 import { Trash } from '../domain/entity/Trash';
 import { TrashRepository } from '../domain/repository/TrashRepository';
-import { useState, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { Text, Box, HStack } from 'native-base';
+import { useFocusEffect } from '@react-navigation/native';
+import AppLoading from 'expo-app-loading';
 
 export const TrashCalendar = () => {
   const { setValue, watch } = useForm<Trash>();
   const [trashes, setTrashes] = useState<Trash[]>();
+  const [isReady, setIsReady] = useState<boolean>(false);
 
   const fetchRegion = async (data: Trash) => {
     try {
@@ -16,7 +19,9 @@ export const TrashCalendar = () => {
       const trashData = await repository.getTrashDates(data);
       setTrashes(trashData)
     } catch(e) {
-      console.log(e)
+      console.log(e);
+    } finally {
+      setIsReady(true);
     }
   }
 
@@ -26,13 +31,13 @@ export const TrashCalendar = () => {
     fetchRegion(watch())
   }
 
-  useEffect(() => {
-    init();
-  }, [])
+  useFocusEffect(
+    useCallback(() => {
+      init();
+    }, []),
+  )
 
-  if (!trashes) return null;
-
-  const events = trashes.map((trash) => {
+  const events = trashes?.map((trash) => {
     return {title: trash.name, start: new Date(trash.date), end: new Date(trash.date)}
   })
 
@@ -85,6 +90,7 @@ export const TrashCalendar = () => {
     </Box>
   )
 
+  if (!isReady || !events) return <AppLoading />
 
   return (
     <Box height='100%'>
