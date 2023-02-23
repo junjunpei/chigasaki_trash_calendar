@@ -1,25 +1,25 @@
-import { Box, FlatList, Pressable, Text, HStack } from "native-base"
-import { MaterialIcons } from '@expo/vector-icons'; 
-import { useNavigation } from "@react-navigation/native";
-import { RootStackParamList } from "../screens/type";
-import { StackNavigationProp } from "@react-navigation/stack";
+import { Box, FlatList, Pressable, Text, HStack } from 'native-base';
+import { MaterialIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import { RootStackParamList } from '../screens/type';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 type SettingDataType = {
   title: string;
   navigateName: keyof RootStackParamList;
-}
+};
 
 export const Setting = () => {
   const SETTING_DATA: SettingDataType[] = [
     {
       title: '登録地区変更',
-      navigateName: 'UpdateRegion' as keyof RootStackParamList
+      navigateName: 'UpdateRegion' as keyof RootStackParamList,
     },
     // {
     //   title: '通知設定',
     //   navigateName: ''
     // }
-  ]
+  ];
 
   const { navigate } = useNavigation<StackNavigationProp<RootStackParamList>>();
 
@@ -27,11 +27,9 @@ export const Setting = () => {
     <Box bgColor='white' height='100%'>
       <FlatList
         data={SETTING_DATA}
-        renderItem={({item}) => (
-          <Pressable
-            onPress={() => navigate(item.navigateName)}
-          >
-            {({isPressed}) => {
+        renderItem={({ item }) => (
+          <Pressable onPress={() => navigate(item.navigateName)}>
+            {({ isPressed }) => {
               return (
                 <Box>
                   <HStack
@@ -46,11 +44,11 @@ export const Setting = () => {
                     <MaterialIcons name='keyboard-arrow-right' size={30} color='gray' />
                   </HStack>
                 </Box>
-              )
+              );
             }}
           </Pressable>
         )}
       />
     </Box>
-  )
-}
+  );
+};

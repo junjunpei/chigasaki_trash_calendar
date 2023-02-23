@@ -1,8 +1,8 @@
 export class Trash {
-  constructor(
+	constructor(
     public id: number | undefined,
     public name: string,
     public regionId: number,
-    public date: Date
+    public date: Date,
   ) {}
 }

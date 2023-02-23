@@ -9,11 +9,7 @@ export interface UserResponse {
 
 export class UserFactory {
   static storageFromResponse(res: UserResponse) {
-    AsyncStorage.setItem('region', String(res.region_id))
-    return new User (
-      res.id,
-      res.town_name,
-      res.region_id
-    )
+    AsyncStorage.setItem('region', String(res.region_id));
+    return new User(res.id, res.town_name, res.region_id);
   }
 }

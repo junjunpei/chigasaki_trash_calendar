@@ -15,51 +15,55 @@ export const TrashCalendar = () => {
 
   const fetchRegion = async (data: Trash) => {
     try {
-      const repository = new TrashRepository;
+      const repository = new TrashRepository();
       const trashData = await repository.getTrashDates(data);
-      setTrashes(trashData)
-    } catch(e) {
+      setTrashes(trashData);
+    } catch (e) {
       console.log(e);
     } finally {
       setIsReady(true);
     }
-  }
+  };
 
   const init = async () => {
-    const region = await AsyncStorage.getItem('region')
-    setValue('regionId', Number(region))
-    fetchRegion(watch())
-  }
+    const region = await AsyncStorage.getItem('region');
+    setValue('regionId', Number(region));
+    fetchRegion(watch());
+  };
 
   useFocusEffect(
     useCallback(() => {
       init();
     }, []),
-  )
+  );
 
   const events = trashes?.map((trash) => {
-    return {title: trash.name, start: new Date(trash.date), end: new Date(trash.date)}
-  })
+    return { title: trash.name, start: new Date(trash.date), end: new Date(trash.date) };
+  });
 
-  const thieYear = new Date().getFullYear()
-  const thisMonth = Number(new Date().getMonth()) + 1
+  const thieYear = new Date().getFullYear();
+  const thisMonth = Number(new Date().getMonth()) + 1;
 
   const header = () => {
     return (
       <Box bgColor='white'>
         <Text textAlign='center' fontSize={22}>{`${thieYear}年${thisMonth}月`}</Text>
         <HStack justifyContent='space-around' mx={3}>
-          <Text color='red.500' bold>日</Text>
+          <Text color='red.500' bold>
+            日
+          </Text>
           <Text bold>月</Text>
           <Text bold>火</Text>
           <Text bold>水</Text>
           <Text bold>木</Text>
           <Text bold>金</Text>
-          <Text color='blue.500' bold mr={-0.5}>土</Text>
+          <Text color='blue.500' bold mr={-0.5}>
+            土
+          </Text>
         </HStack>
       </Box>
-    )
-  }
+    );
+  };
 
   const changeColor = (title: string) => {
     switch (title) {
@@ -78,19 +82,19 @@ export const TrashCalendar = () => {
       case '収集なし':
         return 'muted.400';
       default:
-        throw new Error('該当のごみがありません')
+        throw new Error('該当のごみがありません');
     }
-  }
+  };
 
-  const renderEvent = <T extends ICalendarEventBase>(
-    event: T,
-  ) => (
+  const renderEvent = <T extends ICalendarEventBase>(event: T) => (
     <Box bgColor={changeColor(event.title)} borderRadius={4} p={1}>
-      <Text fontSize={8.5} bold>{event.title}</Text>
+      <Text fontSize={8.5} bold>
+        {event.title}
+      </Text>
     </Box>
-  )
+  );
 
-  if (!isReady || !events) return <AppLoading />
+  if (!isReady || !events) return <AppLoading />;
 
   return (
     <Box height='100%'>
@@ -102,9 +106,9 @@ export const TrashCalendar = () => {
         renderHeaderForMonthView={header}
         renderEvent={renderEvent}
         bodyContainerStyle={{
-          backgroundColor: 'white'
+          backgroundColor: 'white',
         }}
       />
     </Box>
-  )
-}
+  );
+};

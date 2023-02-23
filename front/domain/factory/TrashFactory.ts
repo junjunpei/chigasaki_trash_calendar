@@ -1,4 +1,4 @@
-import { Trash } from "../entity/Trash";
+import { Trash } from '../entity/Trash';
 
 export interface TrashResponse {
   id: number;
@@ -9,11 +9,6 @@ export interface TrashResponse {
 
 export class TrashFactory {
   static getFromResponse(res: TrashResponse) {
-    return new Trash(
-      res.id,
-      res.name,
-      res.region_id,
-      res.date
-    )
+    return new Trash(res.id, res.name, res.region_id, res.date);
   }
 }

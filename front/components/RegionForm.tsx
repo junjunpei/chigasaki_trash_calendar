@@ -1,8 +1,8 @@
-import { InputGroup, Input, InputLeftAddon, Box, FlatList, Text } from "native-base"
-import { useFormContext } from "react-hook-form";
-import { User } from "../domain/entity/User";
-import { towns } from "../utils/SuggestionList";
-import { Pressable } from "native-base";
+import { InputGroup, Input, InputLeftAddon, Box, FlatList, Text } from 'native-base';
+import { useFormContext } from 'react-hook-form';
+import { User } from '../domain/entity/User';
+import { towns } from '../utils/SuggestionList';
+import { Pressable } from 'native-base';
 
 export const RegionForm = () => {
   const { register, setValue, watch } = useFormContext<User>();
@@ -12,10 +12,10 @@ export const RegionForm = () => {
   return (
     <Box>
       <InputGroup>
-        <InputLeftAddon children='茅ヶ崎市' />
+        <InputLeftAddon>茅ヶ崎市</InputLeftAddon>
         <Input
           {...register('townName')}
-          placeholder="例）香川"
+          placeholder='例）香川'
           onChangeText={(word) => setValue('townName', word)}
           value={watch('townName')}
           width='80%'
@@ -27,31 +27,33 @@ export const RegionForm = () => {
       </InputGroup>
       <FlatList
         data={suggestionList}
-        renderItem={({item}) => (
-          <Pressable
-            onPress={() => setValue('townName', item)}
-          >
-            {({isPressed}) => {
-              return suggestionList && watch('townName')?.length !== 0 && item !== watch('townName') && (
-                <Box
-                  width='80%'
-                  borderWidth={1}
-                  borderTopWidth={0}
-                  borderColor='gray.300'
-                  ml='19.5%'
-                  borderRadius={4}
-                  borderLeftRadius={0}
-                  bgColor={isPressed ? 'primary.100' : 'white'}
-                >
-                  <Text pl={2} my={2}>
-                    {item}
-                  </Text>
-                </Box>
-              )
+        renderItem={({ item }) => (
+          <Pressable onPress={() => setValue('townName', item)}>
+            {({ isPressed }) => {
+              return (
+                suggestionList &&
+                watch('townName')?.length !== 0 &&
+                item !== watch('townName') && (
+                  <Box
+                    width='80%'
+                    borderWidth={1}
+                    borderTopWidth={0}
+                    borderColor='gray.300'
+                    ml='19.5%'
+                    borderRadius={4}
+                    borderLeftRadius={0}
+                    bgColor={isPressed ? 'primary.100' : 'white'}
+                  >
+                    <Text pl={2} my={2}>
+                      {item}
+                    </Text>
+                  </Box>
+                )
+              );
             }}
           </Pressable>
         )}
       />
     </Box>
-  )
-}
+  );
+};
