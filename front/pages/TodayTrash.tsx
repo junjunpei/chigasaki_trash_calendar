@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../screens/type";
+import AppLoading from "expo-app-loading";
 
 export const TodayTrash = () => {
   const { setValue, watch } = useForm<Trash>();
@@ -48,16 +49,37 @@ export const TodayTrash = () => {
 
   const today = year + '-' + month.toString().padStart(2, "0") + '-' + day.toString().padStart(2, "0")
 
-  if (!trashes) return null
+  const todayTrash = trashes?.find((t) =>  t.date.toString() === today)
 
-  const todayTrash = trashes.find((t) =>  t.date.toString() === today)
+  const changeColor = (title: string) => {
+    switch (title) {
+      case '燃やせるごみ':
+        return 'danger.400';
+      case 'びん・かん・ペットボトル\n廃食用油・金属油':
+        return 'primary.400';
+      case '燃やせないごみ':
+        return 'success.400';
+      case 'プラスチック製容器包装類':
+        return 'primary.200';
+      case '古紙類':
+        return 'warning.700';
+      case '衣類・布類':
+        return 'warning.300';
+      case '収集なし':
+        return 'muted.400';
+      default:
+        throw new Error('該当のごみがありません')
+    }
+  }
+
+  if (!todayTrash) return <AppLoading />
 
   return (
     <Box bgColor='white' height='100%' p={4} pt='30%'>
       <Center>
         <Box
           size={300}
-          bgColor='green.300'
+          bgColor={changeColor(todayTrash.name)}
           alignItems='center'
           justifyContent='center'
           borderRadius={4}

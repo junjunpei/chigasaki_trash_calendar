@@ -8,9 +8,11 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useState, useEffect, useCallback } from 'react';
 import * as Font from 'expo-font';
 import Entypo from '@expo/vector-icons/Entypo';
+import { LogBox } from 'react-native';
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
+  LogBox.ignoreAllLogs();
 
   const prepare = async () => {
     try {

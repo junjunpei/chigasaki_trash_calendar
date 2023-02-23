@@ -2,6 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FontAwesome5 } from '@expo/vector-icons'; 
 import { BottomTabNavigatorParamList } from '../screens/type';
 import { TodayTrash } from '../pages/TodayTrash';
+import { TrashCalendar } from '../pages/Calendar';
 
 export const BottomTabs = () => {
   const Tab = createBottomTabNavigator<BottomTabNavigatorParamList>();
@@ -22,7 +23,7 @@ export const BottomTabs = () => {
             <FontAwesome5 name={iconName} size={size} color={color} />
           );
         },
-        tabBarActiveTintColor: 'green',
+        tabBarActiveTintColor: 'limegreen',
         tabBarInactiveTintColor: 'gray',
       })}
     >
@@ -34,7 +35,13 @@ export const BottomTabs = () => {
           headerLeft: () => null
         }}
       />
-      {/* <Tab.Screen name='TodayTrash' component={TodayTrash} /> */}
+      <Tab.Screen
+        name='Calendar'
+        component={TrashCalendar}
+        options={{
+          title: 'ごみカレンダー',
+        }}
+      />
     </Tab.Navigator>
   )
 }
