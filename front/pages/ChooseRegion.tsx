@@ -2,8 +2,8 @@ import { TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { towns } from '../utils/SuggestionList';
 import { useForm, FormProvider } from 'react-hook-form';
 import { FormControl, Box, Button } from 'native-base';
-import { UserRepository } from '../domain/repository/UserRepository';
-import { User } from '../domain/entity/User';
+import { RegionRepository } from '../domain/repository/RegionRepository';
+import { Region } from '../domain/entity/Region';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../screens/type';
@@ -12,15 +12,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { RegionForm } from '../components/RegionForm';
 
 export const ChooseRegion = () => {
-  const methods = useForm<User>();
+  const methods = useForm<Region>();
 
   const { handleSubmit, watch } = methods;
 
   const { navigate } = useNavigation<StackNavigationProp<RootStackParamList>>();
 
-  const onSubmit = async (data: User) => {
+  const onSubmit = async (data: Region) => {
     try {
-      const repository = new UserRepository();
+      const repository = new RegionRepository();
       await repository.create(data);
       const region = await AsyncStorage.getItem('region');
       if (region) navigate('BottomTabs');

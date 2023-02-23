@@ -1,11 +1,11 @@
 import { InputGroup, Input, InputLeftAddon, Box, FlatList, Text } from 'native-base';
 import { useFormContext } from 'react-hook-form';
-import { User } from '../domain/entity/User';
+import { Region } from '../domain/entity/Region';
 import { towns } from '../utils/SuggestionList';
 import { Pressable } from 'native-base';
 
 export const RegionForm = () => {
-  const { register, setValue, watch } = useFormContext<User>();
+  const { register, setValue, watch } = useFormContext<Region>();
 
   const suggestionList = towns.filter((town) => town.includes(watch('townName')));
 
