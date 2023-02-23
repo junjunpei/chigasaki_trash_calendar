@@ -5,6 +5,7 @@ import { BottomTabs } from '../components/BottomTabs';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
+import { UpdateRegion } from '../pages/UpdateRegion';
 
 export const RootStack = () => {
   const RootStack = createStackNavigator<RootStackParamList>();
@@ -28,7 +29,7 @@ export const RootStack = () => {
       </RootStack.Group>
       <RootStack.Group>
         <RootStack.Screen name='ChooseRegion' component={ChooseRegion} options={{ title: '地区登録', headerLeft: () => null }} />
-        <RootStack.Screen name='UpdateRegion' component={ChooseRegion} options={{ title: '地区変更' }} />
+        <RootStack.Screen name='UpdateRegion' component={UpdateRegion} options={{ title: '登録地区変更', headerBackTitle: '戻る' }} />
       </RootStack.Group>
     </RootStack.Navigator>
   )

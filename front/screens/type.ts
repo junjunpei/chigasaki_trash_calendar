@@ -7,4 +7,5 @@ export type RootStackParamList = {
 export type BottomTabNavigatorParamList = {
   TodayTrash: undefined;
   Calendar: undefined;
+  Setting: undefined;
 }
