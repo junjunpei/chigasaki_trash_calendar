@@ -1,9 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native';
-import { NativeBaseProvider } from 'native-base'
+import { NativeBaseProvider } from 'native-base';
 import { NavigationContainer } from '@react-navigation/native';
 import { SSRProvider } from '@react-aria/ssr';
-import { RootStack } from './screens/RootStack'
+import { RootStack } from './screens/RootStack';
 import * as SplashScreen from 'expo-splash-screen';
 import { useState, useEffect, useCallback } from 'react';
 import * as Font from 'expo-font';
@@ -22,7 +22,7 @@ export default function App() {
     } finally {
       setAppIsReady(true);
     }
-  }
+  };
 
   useEffect(() => {
     prepare();
@@ -46,4 +46,3 @@ export default function App() {
     </SSRProvider>
   );
 }
-

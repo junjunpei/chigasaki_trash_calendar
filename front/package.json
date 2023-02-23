@@ -6,7 +6,12 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "eject": "expo eject",
+    "lint": "eslint './**/*.{js,ts,tsx}'",
+    "lint:fix": "eslint --fix './**/*.{js,ts,tsx}'",
+    "format": "prettier --check './**/*.{js,ts,tsx}'",
+    "format:fix": "prettier --write ./**/*.{js,ts,tsx}"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "~1.17.3",
@@ -35,7 +40,27 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@types/react-native": "^0.71.3",
+    "@typescript-eslint/eslint-plugin": "^5.53.0",
+    "@typescript-eslint/parser": "^5.53.0",
+    "eslint": "^8.34.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.2",
+    "prettier": "^2.8.4",
     "typescript": "^4.6.3"
   },
-  "private": true
+  "private": true,
+  "lint-staged": {
+    "./**/*.{js,ts,tsx}": [
+      "yarn lint:fix",
+      "yarn format:fix"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
 }

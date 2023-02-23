@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { FontAwesome5, Ionicons } from '@expo/vector-icons'; 
+import { FontAwesome5, Ionicons } from '@expo/vector-icons';
 import { BottomTabNavigatorParamList } from '../screens/type';
 import { TodayTrash } from '../pages/TodayTrash';
 import { TrashCalendar } from '../pages/Calendar';
@@ -7,18 +7,18 @@ import { Setting } from '../pages/Setting';
 
 export const BottomTabs = () => {
   const Tab = createBottomTabNavigator<BottomTabNavigatorParamList>();
-  
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size }) => {
           let iconName;
-          const settingIconName = 'settings'
+          const settingIconName = 'settings';
 
           if (route.name === 'TodayTrash') {
-            iconName = 'trash'
+            iconName = 'trash';
           } else if (route.name === 'Calendar') {
-            iconName = 'calendar-alt'
+            iconName = 'calendar-alt';
           }
 
           return (
@@ -40,7 +40,7 @@ export const BottomTabs = () => {
         component={TodayTrash}
         options={{
           title: '本日のごみの種類',
-          headerLeft: () => null
+          headerLeft: () => null,
         }}
       />
       <Tab.Screen
@@ -58,5 +58,5 @@ export const BottomTabs = () => {
         }}
       />
     </Tab.Navigator>
-  )
-}
+  );
+};

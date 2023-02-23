@@ -58,4 +58,4 @@ export const towns: string[] = [
   '柳島',
   '柳島海岸',
   '浜見平',
-]
+];
