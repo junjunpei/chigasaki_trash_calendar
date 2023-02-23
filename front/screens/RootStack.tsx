@@ -28,7 +28,7 @@ export const RootStack = () => {
       </RootStack.Group>
       <RootStack.Group>
         <RootStack.Screen name='ChooseRegion' component={ChooseRegion} options={{ title: '地区登録', headerLeft: () => null }} />
-        <RootStack.Screen name='UpdateRegion' component={ChooseRegion} options={{ title: '地区変更' }} />
+        <RootStack.Screen name='UpdateRegion' component={ChooseRegion} options={{ title: '登録地区変更' }} />
       </RootStack.Group>
     </RootStack.Navigator>
   )

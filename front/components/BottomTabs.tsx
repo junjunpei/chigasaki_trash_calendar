@@ -1,8 +1,9 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { FontAwesome5 } from '@expo/vector-icons'; 
+import { FontAwesome5, Ionicons } from '@expo/vector-icons'; 
 import { BottomTabNavigatorParamList } from '../screens/type';
 import { TodayTrash } from '../pages/TodayTrash';
 import { TrashCalendar } from '../pages/Calendar';
+import { Setting } from '../pages/Setting';
 
 export const BottomTabs = () => {
   const Tab = createBottomTabNavigator<BottomTabNavigatorParamList>();
@@ -12,6 +13,7 @@ export const BottomTabs = () => {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size }) => {
           let iconName;
+          const settingIconName = 'settings'
 
           if (route.name === 'TodayTrash') {
             iconName = 'trash'
@@ -20,7 +22,13 @@ export const BottomTabs = () => {
           }
 
           return (
-            <FontAwesome5 name={iconName} size={size} color={color} />
+            <>
+              {route.name === 'Setting' ? (
+                <Ionicons name={settingIconName} size={size} color={color} />
+              ) : (
+                <FontAwesome5 name={iconName} size={size} color={color} />
+              )}
+            </>
           );
         },
         tabBarActiveTintColor: 'limegreen',
@@ -40,6 +48,13 @@ export const BottomTabs = () => {
         component={TrashCalendar}
         options={{
           title: 'ごみカレンダー',
+        }}
+      />
+      <Tab.Screen
+        name='Setting'
+        component={Setting}
+        options={{
+          title: '各種設定',
         }}
       />
     </Tab.Navigator>
