@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_23_152827) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_23_160503) do
   create_table "regions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "name", null: false
     t.string "town_name", null: false
@@ -20,7 +20,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_23_152827) do
 
   create_table "trashes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "region_id"
-    t.string "name", null: false
+    t.integer "name", null: false
     t.date "date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

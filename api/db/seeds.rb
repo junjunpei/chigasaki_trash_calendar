@@ -8,6 +8,16 @@
 
 require 'csv'
 
+TRASH_NAME = {
+  '衣類・布類' => 'clothes',
+  'プラスチック製容器包装類' => 'plastic',
+  '燃やせるごみ' => 'burnable',
+  "びん・かん・ペットボトル\n廃食用油・金属油" => 'bottles_and_oil',
+  '燃やせないごみ' => 'unburnable',
+  '古紙類' => 'paper',
+  '収集なし' => 'nothing'
+}
+
 (1..8).to_a.each do |i|
   CSV.foreach('./app/assets/town.csv', headers: true) do |n|
     next if n["Region#{i}"].nil?
@@ -20,8 +30,8 @@ end
 
 (1..8).to_a.each do |i|
   CSV.foreach("./app/assets/region#{i}.csv", headers: true) do |n|
-    Trash.where(name: n['trash'], date: n['date'], region_id: i).first_or_create!(
-      name: n['trash'],
+    Trash.where(name: TRASH_NAME[n['trash']], date: n['date'], region_id: i).first_or_create!(
+      name: TRASH_NAME[n['trash']],
       date: n['date'],
       region_id: i
     )

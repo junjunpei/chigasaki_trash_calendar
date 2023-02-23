@@ -1,8 +1,9 @@
+import { TrashName } from './../entity/Trash';
 import { Trash } from '../entity/Trash';
 
 export interface TrashResponse {
   id: number;
-  name: string;
+  name: TrashName;
   region_id: number;
   date: Date;
 }

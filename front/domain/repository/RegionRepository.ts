@@ -12,7 +12,6 @@ export class RegionRepository {
       town_name: townName,
     };
     const res = await axios.post<RegionResponse>('http://127.0.0.1:3001/register_region', params);
-    console.log(res);
     return RegionFactory.storageFromResponse(res.data);
   }
 

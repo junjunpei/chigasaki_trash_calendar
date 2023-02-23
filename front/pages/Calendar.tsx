@@ -7,6 +7,8 @@ import { useState, useCallback } from 'react';
 import { Text, Box, HStack } from 'native-base';
 import { useFocusEffect } from '@react-navigation/native';
 import AppLoading from 'expo-app-loading';
+import { EnumToText } from '../utils/EnumToText';
+import { TrashName } from '../domain/entity/Trash';
 
 export const TrashCalendar = () => {
   const { setValue, watch } = useForm<Trash>();
@@ -67,19 +69,19 @@ export const TrashCalendar = () => {
 
   const changeColor = (title: string) => {
     switch (title) {
-      case '燃やせるごみ':
+      case TrashName.Burnable:
         return 'danger.400';
-      case 'びん・かん・ペットボトル\n廃食用油・金属油':
+      case TrashName.BottolesAndOil:
         return 'primary.400';
-      case '燃やせないごみ':
+      case TrashName.Unburnable:
         return 'success.400';
-      case 'プラスチック製容器包装類':
+      case TrashName.Plastic:
         return 'primary.200';
-      case '古紙類':
+      case TrashName.Paper:
         return 'amber.700';
-      case '衣類・布類':
+      case TrashName.Clothes:
         return 'warning.300';
-      case '収集なし':
+      case TrashName.Nothing:
         return 'muted.400';
       default:
         throw new Error('該当のごみがありません');
@@ -89,13 +91,13 @@ export const TrashCalendar = () => {
   const renderEvent = <T extends ICalendarEventBase>(event: T) => (
     <Box bgColor={changeColor(event.title)} borderRadius={4} p={1}>
       <Text fontSize={8.5} bold>
-        {event.title}
+        {EnumToText.trashNameEnumToText(event.title)}
       </Text>
     </Box>
   );
-
+  
   if (!isReady || !events) return <AppLoading />;
-
+  
   return (
     <Box height='100%'>
       <Calendar
