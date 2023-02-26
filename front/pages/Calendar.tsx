@@ -44,7 +44,7 @@ export const TrashCalendar = () => {
   });
 
   const thieYear = new Date().getFullYear();
-  const thisMonth = Number(new Date().getMonth()) + 1;
+  const thisMonth = new Date().getMonth() + 1;
 
   const header = () => {
     return (
@@ -110,6 +110,7 @@ export const TrashCalendar = () => {
         bodyContainerStyle={{
           backgroundColor: 'white',
         }}
+        swipeEnabled={false}
       />
     </Box>
   );
