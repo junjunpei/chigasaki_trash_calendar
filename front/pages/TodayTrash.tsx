@@ -1,4 +1,4 @@
-import { Box, Center, Button, Heading } from 'native-base';
+import { Box, Center, Button, Heading, VStack } from 'native-base';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { TrashRepository } from '../domain/repository/TrashRepository';
 import { Trash } from '../domain/entity/Trash';
@@ -14,6 +14,7 @@ import { TrashName } from '../domain/entity/Trash';
 export const TodayTrash = () => {
   const { setValue, watch } = useForm<Trash>();
   const [trashes, setTrashes] = useState<Trash[]>();
+  const [townName, setTownName] = useState<string | null>();
   const { navigate } = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   const fetchRegion = async () => {
@@ -28,7 +29,7 @@ export const TodayTrash = () => {
 
   const clearStorage = async () => {
     try {
-      await AsyncStorage.removeItem('region');
+      await AsyncStorage.removeItem('regionId');
       navigate('ChooseRegion');
     } catch (e) {
       console.warn(e);
@@ -36,8 +37,9 @@ export const TodayTrash = () => {
   };
 
   const init = async () => {
-    const region = await AsyncStorage.getItem('region');
-    setValue('regionId', Number(region));
+    const region = await AsyncStorage.multiGet(['regionId', 'townName']);
+    setValue('regionId', Number(region[0][1]));
+    setTownName(region[1][1]);
     fetchRegion();
   };
 
@@ -80,24 +82,27 @@ export const TodayTrash = () => {
   if (!todayTrash) return <AppLoading />;
 
   return (
-    <Box bgColor='white' height='100%' p={4} pt='30%'>
+    <Box bgColor='white' height='100%' p={4} pt='15%'>
       <Center>
-        <Box
-          size={300}
-          bgColor={changeColor(todayTrash.name)}
-          alignItems='center'
-          justifyContent='center'
-          borderRadius={4}
-        >
-          {todayTrash && (
-            <Heading fontSize={26} textAlign='center'>
-              {EnumToText.trashNameEnumToText(todayTrash.name)}
-            </Heading>
-          )}
-        </Box>
-        <Button mt={10} onPress={() => clearStorage()}>
-          データ削除
-        </Button>
+        <VStack space={10}>
+          <Heading textAlign='center'>登録地区：{townName}</Heading>
+          <Box
+            size={300}
+            bgColor={changeColor(todayTrash.name)}
+            alignItems='center'
+            justifyContent='center'
+            borderRadius={4}
+          >
+            {todayTrash && (
+              <Heading fontSize={26} textAlign='center'>
+                {EnumToText.trashNameEnumToText(todayTrash.name)}
+              </Heading>
+            )}
+          </Box>
+          <Button mt={10} mx='auto' onPress={() => clearStorage()}>
+            データ削除
+          </Button>
+        </VStack>
       </Center>
     </Box>
   );

@@ -22,7 +22,7 @@ export const ChooseRegion = () => {
     try {
       const repository = new RegionRepository();
       await repository.create(data);
-      const region = await AsyncStorage.getItem('region');
+      const region = await AsyncStorage.getItem('regionId');
       if (region) navigate('BottomTabs');
     } catch (e) {
       alert('地区登録に失敗しました\n選択し直した上で再度お試しください');
@@ -39,7 +39,7 @@ export const ChooseRegion = () => {
   });
 
   const fetchUser = async () => {
-    const region = await AsyncStorage.getItem('region');
+    const region = await AsyncStorage.getItem('regionId');
     if (region !== null) setIsRegistered(true);
   };
 

@@ -28,7 +28,7 @@ export const TrashCalendar = () => {
   };
 
   const init = async () => {
-    const region = await AsyncStorage.getItem('region');
+    const region = await AsyncStorage.getItem('regionId');
     setValue('regionId', Number(region));
     fetchRegion(watch());
   };

@@ -8,7 +8,7 @@ export interface RegionResponse {
 
 export class RegionFactory {
   static storageFromResponse(res: RegionResponse) {
-    AsyncStorage.setItem('region', String(res.name));
+    AsyncStorage.multiSet([['regionId', String(res.name)], ['townName', String(res.town_name)]]);
     return new Region(res.name, res.town_name);
   }
 }

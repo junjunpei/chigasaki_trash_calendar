@@ -21,7 +21,7 @@ export const UpdateRegion = () => {
     try {
       const repository = new RegionRepository();
       await repository.create(data);
-      const region = await AsyncStorage.getItem('region');
+      const region = await AsyncStorage.getItem('regionId');
       if (region) navigate('TodayTrash');
     } catch (e) {
       alert('地区登録に失敗しました\n選択し直した上で再度お試しください');

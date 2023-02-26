@@ -16,7 +16,7 @@ export const RootStack = () => {
   });
 
   const fetchRegion = async () => {
-    const region = await AsyncStorage.getItem('region');
+    const region = await AsyncStorage.getItem('regionId');
     if (region !== null) setIsRegistered(true);
   };
 
