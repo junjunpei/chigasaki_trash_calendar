@@ -50,13 +50,28 @@ export const TodayTrash = () => {
   );
 
   const year = new Date().getFullYear();
-  const month = Number(new Date().getMonth()) + 1;
+  const month = new Date().getMonth();
   const day = new Date().getDate();
 
-  const today =
-    year + '-' + month.toString().padStart(2, '0') + '-' + day.toString().padStart(2, '0');
+  const today = new Date(year, month, day, 9);
+  const tomorrow = new Date(year, month, day, 9);
+  const dayAfterTomorrow = new Date(year, month, day, 9);
 
-  const todayTrash = trashes?.find((t) => t.date.toString() === today);
+  tomorrow.setDate(today.getDate() + 1);
+  dayAfterTomorrow.setDate(tomorrow.getDate() + 1);
+
+  const searchDate = (trash: Trash) => {
+    switch (new Date(trash.date).getTime()) {
+      case today.getTime():
+      case tomorrow.getTime():
+      case dayAfterTomorrow.getTime():
+        return trash;
+      default:
+        return null;
+    }
+  };
+
+  const todayTrash = trashes?.find((t) => searchDate(t));
 
   const changeColor = (title: TrashName) => {
     switch (title) {
