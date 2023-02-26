@@ -39,7 +39,11 @@ export const BottomTabs = () => {
         name='TodayTrash'
         component={TodayTrash}
         options={{
-          title: '本日のごみの種類',
+          title: new Date().getDay() === 6
+            ? '明後日の収集物'
+            : new Date().getDay() === 0
+              ? '明日の収集物'
+              : '本日の収集物',
           headerLeft: () => null,
         }}
       />
@@ -47,7 +51,7 @@ export const BottomTabs = () => {
         name='Calendar'
         component={TrashCalendar}
         options={{
-          title: 'ごみカレンダー',
+          title: 'カレンダー',
         }}
       />
       <Tab.Screen
